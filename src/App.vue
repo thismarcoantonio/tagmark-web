@@ -8,4 +8,10 @@
   </p>
 </template>
 
-<style scoped></style>
+<style scoped>
+@import 'tailwindcss';
+
+body {
+  @apply bg-neutral-50;
+}
+</style>
