@@ -1,5 +1,11 @@
 <template>
-  <div class="p-4 bg-white border border-neutral-200">
+  <component :is="is ?? 'div'" class="p-4 bg-white border border-neutral-200">
     <slot />
-  </div>
+  </component>
 </template>
+
+<script lang="ts" setup>
+defineProps<{
+  is?: string;
+}>();
+</script>
