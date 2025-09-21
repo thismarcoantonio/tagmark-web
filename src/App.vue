@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <h1>You did it!</h1>
   <p>
@@ -8,7 +6,9 @@
   </p>
 </template>
 
-<style scoped>
+<script lang="ts" setup></script>
+
+<style>
 @import 'tailwindcss';
 
 body {
