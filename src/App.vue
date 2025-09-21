@@ -1,9 +1,5 @@
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <router-view />
 </template>
 
 <script lang="ts" setup></script>
@@ -12,6 +8,7 @@
 @import 'tailwindcss';
 
 body {
-  @apply bg-neutral-50;
+  @apply bg-neutral-50 font-sans;
+  font-family: Nunito;
 }
 </style>

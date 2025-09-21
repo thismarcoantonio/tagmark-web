@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import '@fontsource/nunito/400.css';
 import '@fontsource/nunito/500.css';
 import '@fontsource/nunito/600.css';
+import '@fontsource/nunito/700.css';
 import App from './App.vue';
 import router from './router';
 
