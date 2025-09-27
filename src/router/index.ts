@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Homepage from '@/pages/Homepage.vue';
 import Login from '@/pages/Login.vue';
+import Register from '@/pages/Register.vue';
 import MyTags from '@/pages/MyTags.vue';
 import SaveBookmark from '@/pages/SaveBookmark.vue';
 
 export enum Routes {
   Login = 'login',
+  Register = 'register',
   Homepage = 'homepage',
   MyTags = 'tags',
   SaveBookmark = 'bookmark',
@@ -24,6 +26,7 @@ const router = createRouter({
       ],
     },
     { path: '/login', name: Routes.Login, component: Login },
+    { path: '/register', name: Routes.Register, component: Register },
   ],
 });
 

@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+body {
+  @apply bg-yellow-50 text-gray-600;
+  font-family: 'Nunito', sans-serif;
+}
