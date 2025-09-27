@@ -1,8 +1,8 @@
 <template>
-  <div class="text-center p-4 mt-10">
+  <div class="mt-10 p-4 text-center">
     <main-title />
     <p class="mb-8">Save your bookmarks using tags to facilitate finding it later!</p>
-    <main-card is="section" class="py-6 px-8 md:py-8 md:px-14 w-full max-w-[420px] mx-auto">
+    <main-card is="section" class="mx-auto w-full max-w-[420px] px-8 py-6 md:px-14 md:py-8">
       <h2 class="text-lg font-bold text-gray-800">Log in</h2>
       <p class="mb-6">
         Don't have an account?
@@ -12,7 +12,7 @@
       </p>
       <text-field label="Email" name="email" type="email" />
       <text-field label="Password" name="password" type="password" />
-      <div class="text-right mb-6">
+      <div class="mb-6 text-right">
         <router-link to="#" class="text-green-600 underline">Forgot password</router-link>
       </div>
       <main-button class="w-full">Sign in</main-button>

@@ -1,8 +1,8 @@
 <template>
-  <div class="text-center p-4 mt-10">
+  <div class="mt-10 p-4 text-center">
     <main-title />
     <p class="mb-8">Save your bookmarks using tags to facilitate finding it later!</p>
-    <main-card is="section" class="py-6 px-8 md:py-8 md:px-14 w-full max-w-[420px] mx-auto">
+    <main-card is="section" class="mx-auto w-full max-w-[420px] px-8 py-6 md:px-14 md:py-8">
       <h2 class="text-lg font-bold text-gray-800">Create account</h2>
       <p class="mb-6">
         Already have an account?

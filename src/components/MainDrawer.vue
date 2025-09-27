@@ -8,10 +8,10 @@
       leave-to-class="opacity-0"
       leave-active-class="transition-opacity duration-300"
     >
-      <div v-if="isMounted" class="fixed top-0 left-0 bottom-0 right-0 z-10">
-        <div class="bg-black absolute top-0 left-0 bottom-0 right-0 opacity-20" @click="onClose" />
+      <div v-if="isMounted" class="fixed top-0 right-0 bottom-0 left-0 z-10">
+        <div class="absolute top-0 right-0 bottom-0 left-0 bg-black opacity-20" @click="onClose" />
         <div
-          class="main-drawer__card bg-white absolute top-4 right-4 p-4 rounded-xl border-neutral-200 border shadow-md"
+          class="main-drawer__card absolute top-4 right-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-md"
         >
           <slot />
         </div>
