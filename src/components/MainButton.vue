@@ -1,5 +1,7 @@
 <template>
-  <button
+  <component
+    :is="to ? 'router-link' : 'button'"
+    :to="to"
     class="py-3 px-4 rounded-full text-sm font-semibold cursor-pointer"
     :class="{
       'bg-green-700 hover:bg-green-800 text-white': variant === 'primary',
@@ -7,11 +9,14 @@
     }"
   >
     <slot />
-  </button>
+  </component>
 </template>
 
 <script lang="ts" setup>
+import type { RouterLinkProps } from 'vue-router';
+
 interface Props {
+  to?: RouterLinkProps['to'];
   variant?: 'primary' | 'secondary' | 'text';
 }
 

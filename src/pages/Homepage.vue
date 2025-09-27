@@ -7,10 +7,11 @@
       <h1>{{ bookmark.title }}</h1>
       <p>{{ bookmark.description }}</p>
       <div>
-        <span> {{ bookmark.tags.length }} tags </span>
-        <span v-if="bookmark.links.length"> {{ bookmark.links.length }} links </span>
+        <span>{{ bookmark.tags.length }} tags</span>
+        <span v-if="bookmark.links.length">{{ bookmark.links.length }} links</span>
       </div>
     </main-card>
+    <router-view />
   </main>
 </template>
 
