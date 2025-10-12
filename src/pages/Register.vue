@@ -17,7 +17,7 @@
         <main-button class="w-full">Create now</main-button>
       </v-form>
       <main-divider class="my-6">or</main-divider>
-      <google-button />
+      <google-button @click="authService.createGoogleAccount" />
     </main-card>
   </div>
 </template>
