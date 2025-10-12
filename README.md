@@ -1,45 +1,20 @@
-# tagmark-web
+# Tagmark: Web
 
-This template should help get you started developing with Vue 3 in Vite.
+A minimalist web application that facilitates saving and finding bookmarks using tags.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Save bookmarks and use tags to categorize them.
+- Tag-based search and filtering.
+- Synchronization via firebase.
 
-## Type Support for `.vue` Imports in TS
+## Getting started
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+In order to get this application running locally, duplicate `.env.example` and rename it to `.env`. Setup your own firebase variables, then copy the value from the `VITE_FIREBASE_PROJECT_ID` variable.
+Duplicate the `.firebaserc.example` file and rename it to `.firebaserc`. Replace the `"default"` property with the value you copied previously.
 
-## Customize configuration
+Add your own firebase variables before running the following commands:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Install the packages running `npm ci`.
+- Run `./node_modules/.bin/firebase login` to login in firebase with your account.
+- Run `npm run firebase` to get the local emulators running.
