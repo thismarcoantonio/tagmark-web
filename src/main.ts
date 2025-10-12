@@ -4,7 +4,6 @@ import '@fontsource/nunito/500.css';
 import '@fontsource/nunito/600.css';
 import '@fontsource/nunito/700.css';
 import '@fontsource/nunito/800.css';
-import '@/config/firebase';
 import './style.css';
 import App from './App.vue';
 import router from './router';

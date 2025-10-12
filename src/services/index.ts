@@ -1,4 +1,21 @@
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '@/config/firebase';
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { emulatorConfig, firebaseConfig } from '@/config/firebase';
 
-export const app = initializeApp(firebaseConfig);
+export function setupFirebase() {
+  const app = initializeApp(firebaseConfig);
+
+  if (import.meta.env.DEV) {
+    // Setup auth emulators
+    const auth = getAuth();
+    connectAuthEmulator(auth, emulatorConfig.auth);
+
+    // Setup firestore emulators
+    const db = getFirestore();
+    const [firestoreUrl, firestorePort] = emulatorConfig.firestore.split(':');
+    connectFirestoreEmulator(db, firestoreUrl, Number(firestorePort));
+  }
+
+  return app;
+}
