@@ -2,8 +2,21 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithPopup,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
+  type User,
 } from 'firebase/auth';
+
+async function checkUserAuth() {
+  const auth = getAuth();
+  return new Promise<User | false>((resolve, reject) =>
+    onAuthStateChanged(auth, (user) => {
+      if (user) resolve(user);
+      reject(false);
+    }),
+  );
+}
 
 async function createUserAccount(email: string, password: string) {
   const auth = getAuth();
@@ -18,7 +31,15 @@ async function createGoogleAccount() {
   return userCredentials.user;
 }
 
+async function loginUserAccount(email: string, password: string) {
+  const auth = getAuth();
+  const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+  return userCredentials.user;
+}
+
 export const authService = {
+  checkUserAuth,
   createUserAccount,
   createGoogleAccount,
+  loginUserAccount,
 };

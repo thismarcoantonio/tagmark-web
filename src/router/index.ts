@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { authRoutes, privateRoute } from '@/router/auth-guard';
 import Homepage from '@/pages/Homepage.vue';
 import Login from '@/pages/Login.vue';
 import Register from '@/pages/Register.vue';
@@ -20,13 +21,24 @@ const router = createRouter({
       path: '/',
       name: Routes.Homepage,
       component: Homepage,
+      beforeEnter: [privateRoute],
       children: [
         { path: '/tags', name: Routes.MyTags, component: MyTags },
         { path: '/bookmark/:bookmarkId?', name: Routes.SaveBookmark, component: SaveBookmark },
       ],
     },
-    { path: '/login', name: Routes.Login, component: Login },
-    { path: '/register', name: Routes.Register, component: Register },
+    {
+      path: '/login',
+      name: Routes.Login,
+      component: Login,
+      beforeEnter: [authRoutes],
+    },
+    {
+      path: '/register',
+      name: Routes.Register,
+      component: Register,
+      beforeEnter: [authRoutes],
+    },
   ],
 });
 
