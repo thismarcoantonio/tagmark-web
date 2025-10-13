@@ -19,7 +19,7 @@
         <main-button class="w-full">Sign in</main-button>
       </v-form>
       <main-divider class="my-6">or</main-divider>
-      <google-button />
+      <google-button @click="loginWithGoogle" />
     </main-card>
   </div>
 </template>
@@ -49,6 +49,11 @@ const validationSchema = yup.object({
 
 async function onSubmit(values: GenericObject) {
   await authService.loginUserAccount(values.email, values.password);
+  $router.push({ name: Routes.Homepage });
+}
+
+async function loginWithGoogle() {
+  await authService.createOrLoginWithGoogleAccount();
   $router.push({ name: Routes.Homepage });
 }
 </script>

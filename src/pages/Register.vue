@@ -17,12 +17,13 @@
         <main-button class="w-full">Create now</main-button>
       </v-form>
       <main-divider class="my-6">or</main-divider>
-      <google-button @click="authService.createGoogleAccount" />
+      <google-button @click="registerWithGoogle" />
     </main-card>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
 import { Form as VForm, type GenericObject } from 'vee-validate';
 import * as yup from 'yup';
 import { Routes } from '@/router';
@@ -33,6 +34,8 @@ import MainButton from '@/components/MainButton.vue';
 import TextField from '@/components/TextField.vue';
 import MainDivider from '@/components/MainDivider.vue';
 import GoogleButton from '@/components/GoogleButton.vue';
+
+const $router = useRouter();
 
 const validationSchema = yup.object({
   email: yup.string().trim().email('Invalid email address').required('Email is required'),
@@ -48,5 +51,11 @@ const validationSchema = yup.object({
 
 function onSubmit(values: GenericObject) {
   authService.createUserAccount(values.email, values.password);
+  $router.push({ name: Routes.Homepage });
+}
+
+async function registerWithGoogle() {
+  await authService.createOrLoginWithGoogleAccount();
+  $router.push({ name: Routes.Homepage });
 }
 </script>

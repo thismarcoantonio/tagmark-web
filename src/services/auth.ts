@@ -11,10 +11,7 @@ import {
 async function checkUserAuth() {
   const auth = getAuth();
   return new Promise<User | false>((resolve, reject) =>
-    onAuthStateChanged(auth, (user) => {
-      if (user) resolve(user);
-      reject(false);
-    }),
+    onAuthStateChanged(auth, (user) => resolve(user ?? false), reject),
   );
 }
 
@@ -24,7 +21,7 @@ async function createUserAccount(email: string, password: string) {
   return userCredentials.user;
 }
 
-async function createGoogleAccount() {
+async function createOrLoginWithGoogleAccount() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const userCredentials = await signInWithPopup(auth, provider);
@@ -40,6 +37,6 @@ async function loginUserAccount(email: string, password: string) {
 export const authService = {
   checkUserAuth,
   createUserAccount,
-  createGoogleAccount,
+  createOrLoginWithGoogleAccount,
   loginUserAccount,
 };
