@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signOut,
   type User,
 } from 'firebase/auth';
 
@@ -34,9 +35,15 @@ async function loginUserAccount(email: string, password: string) {
   return userCredentials.user;
 }
 
+async function logout() {
+  const auth = getAuth();
+  return signOut(auth);
+}
+
 export const authService = {
   checkUserAuth,
   createUserAccount,
   createOrLoginWithGoogleAccount,
   loginUserAccount,
+  logout,
 };

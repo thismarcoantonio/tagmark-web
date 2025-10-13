@@ -8,11 +8,12 @@
       />
       <search-icon class="absolute top-[13px] right-5" :size="22" />
     </div>
-    <div>
+    <div class="flex items-center">
       <main-button rounded variant="secondary" class="mr-3" :to="{ path: Routes.MyTags }">
         My tags
       </main-button>
-      <main-button rounded>New bookmark</main-button>
+      <main-button rounded class="mr-6">New bookmark</main-button>
+      <user-avatar />
     </div>
   </header>
 </template>
@@ -22,4 +23,5 @@ import { SearchIcon } from 'lucide-vue-next';
 import { Routes } from '@/router';
 import MainTitle from '@/components/MainTitle.vue';
 import MainButton from '@/components/MainButton.vue';
+import UserAvatar from '@/components/UserAvatar.vue';
 </script>
