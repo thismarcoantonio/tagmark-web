@@ -12,7 +12,7 @@
       'rounded-xl': !rounded && size === 'default',
       'rounded-md': !rounded && size === 'small',
       'px-4 py-3 text-base': size === 'default',
-      'rounded-sm px-3 py-1': size === 'small',
+      'px-3 py-1': size === 'small',
     }"
   >
     <slot />

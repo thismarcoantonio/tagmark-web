@@ -14,7 +14,7 @@
           @click="handleClose"
         />
         <div
-          class="absolute h-full w-full bg-white p-6 shadow-md md:top-4 md:right-4 md:w-[30%] md:rounded-xl md:border md:border-b-2 md:border-neutral-200"
+          class="absolute h-full w-full bg-white p-6 shadow-md md:top-4 md:right-4 md:h-10/12 md:w-[30%] md:rounded-xl md:border md:border-b-2 md:border-neutral-200"
         >
           <div class="mb-8 flex justify-between">
             <h2 class="text-xl font-bold">{{ title }}</h2>

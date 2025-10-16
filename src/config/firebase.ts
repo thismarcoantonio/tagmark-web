@@ -11,3 +11,7 @@ export const emulatorConfig = {
   auth: 'http://127.0.0.1:9099',
   firestore: '127.0.0.1:8080',
 };
+
+export enum Collections {
+  TAGS = 'tags',
+}
