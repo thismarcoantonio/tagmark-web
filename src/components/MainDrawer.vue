@@ -9,10 +9,19 @@
       leave-active-class="transition-opacity duration-300"
     >
       <div v-if="isMounted" class="fixed top-0 right-0 bottom-0 left-0 z-10">
-        <div class="absolute top-0 right-0 bottom-0 left-0 bg-black opacity-20" @click="onClose" />
         <div
-          class="main-drawer__card absolute top-4 right-4 rounded-xl border border-neutral-200 bg-white p-4 shadow-md"
+          class="absolute top-0 right-0 bottom-0 left-0 bg-black opacity-20"
+          @click="handleClose"
+        />
+        <div
+          class="main-drawer__card absolute top-4 right-4 rounded-xl border border-b-2 border-neutral-200 bg-white p-6 shadow-md"
         >
+          <div class="mb-8 flex justify-between">
+            <h2 class="text-xl font-bold">{{ title }}</h2>
+            <button class="cursor-pointer" @click="handleClose">
+              <x-icon />
+            </button>
+          </div>
           <slot />
         </div>
       </div>
@@ -22,6 +31,11 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import { XIcon } from 'lucide-vue-next';
+
+defineProps<{
+  title: string;
+}>();
 
 const $emit = defineEmits<{
   (event: 'close'): void;
@@ -29,7 +43,7 @@ const $emit = defineEmits<{
 
 const isMounted = ref(false);
 
-function onClose() {
+function handleClose() {
   isMounted.value = false;
   setTimeout(() => $emit('close'), 300);
 }
@@ -42,6 +56,5 @@ onMounted(() => {
 <style scoped>
 .main-drawer__card {
   width: 30%;
-  height: calc(100% - 32px);
 }
 </style>
