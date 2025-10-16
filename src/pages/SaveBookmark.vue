@@ -1,11 +1,79 @@
 <template>
-  <main-drawer @close="$router.push({ name: Routes.Homepage })">
-    <text-field name="Name" label="Name" />
+  <main-drawer title="New bookmark" @close="$router.push({ name: Routes.Homepage })">
+    <v-form
+      @submit="onSubmit"
+      :validation-schema="validationSchema"
+      :initial-values="initialValues"
+    >
+      <text-field name="title" label="Title" required />
+      <text-field name="description" label="Description" textarea />
+      <v-field-array name="links" v-slot="{ fields, push, remove }">
+        <text-field
+          v-for="(field, index) in fields"
+          :key="field.key"
+          :name="`links[${index}]`"
+          :label="!index ? 'Links' : ''"
+        >
+          <template v-if="index > 0" #append-inner>
+            <button class="cursor-pointer">
+              <x-icon class="mr-2" @click="remove(index)" />
+            </button>
+          </template>
+        </text-field>
+        <v-error-message name="links" class="text-sm text-red-500" />
+        <main-button
+          v-if="fields.length < 5"
+          class="flex items-center gap-1"
+          variant="text"
+          size="small"
+          @click="push('')"
+        >
+          <plus-icon :size="16" :stroke-width="3" />
+          Add new link
+        </main-button>
+      </v-field-array>
+      <main-button type="submit">Create</main-button>
+    </v-form>
   </main-drawer>
 </template>
 
 <script lang="ts" setup>
+import {
+  Form as VForm,
+  FieldArray as VFieldArray,
+  ErrorMessage as VErrorMessage,
+  type GenericObject,
+} from 'vee-validate';
+import { PlusIcon, XIcon } from 'lucide-vue-next';
+import * as yup from 'yup';
 import { Routes } from '@/router';
+import MainButton from '@/components/MainButton.vue';
 import MainDrawer from '@/components/MainDrawer.vue';
 import TextField from '@/components/TextField.vue';
+
+const initialValues = {
+  links: [''],
+  tags: ['1'],
+};
+
+const validationSchema = yup.object({
+  title: yup
+    .string()
+    .required('Title is required')
+    .trim()
+    .min(3, 'Title must be at least 3 characters')
+    .max(255, 'Title cannot exceed 255 characters'),
+  description: yup.string().optional().trim().max(500, 'Description cannot exceed 500 characters'),
+  links: yup
+    .array()
+    .of(yup.string().url('Link must be a valid URL'))
+    .optional()
+    .max(5, 'You can include up to 5 links')
+    .strict(),
+  tags: yup.array().of(yup.string()).required('At least one tag is required'),
+});
+
+function onSubmit(values: GenericObject) {
+  console.log(values);
+}
 </script>

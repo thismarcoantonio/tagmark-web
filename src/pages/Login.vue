@@ -16,7 +16,7 @@
         <div class="mb-6 text-right">
           <router-link to="#" class="text-green-600 underline">Forgot password</router-link>
         </div>
-        <main-button class="w-full">Sign in</main-button>
+        <main-button class="w-full" type="submit">Sign in</main-button>
       </v-form>
       <main-divider class="my-6">or</main-divider>
       <google-button @click="loginWithGoogle" />

@@ -14,7 +14,7 @@
         <text-field label="Email" name="email" type="email" />
         <text-field label="Password" name="password" type="password" />
         <text-field label="Confirm password" type="password" name="passwordConfirmation" />
-        <main-button class="w-full">Create now</main-button>
+        <main-button class="w-full" type="submit">Create now</main-button>
       </v-form>
       <main-divider class="my-6">or</main-divider>
       <google-button @click="registerWithGoogle" />

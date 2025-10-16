@@ -2,6 +2,7 @@
   <component
     :is="to ? 'router-link' : 'button'"
     :to="to"
+    :type="type ?? 'button'"
     class="cursor-pointer font-semibold transition-colors"
     :class="{
       'border-gray-600 bg-green-600 text-white hover:bg-green-700': variant === 'primary',
@@ -25,6 +26,7 @@ import type { RouterLinkProps } from 'vue-router';
 interface Props {
   to?: RouterLinkProps['to'];
   rounded?: boolean;
+  type?: HTMLButtonElement['type'];
   variant?: 'primary' | 'secondary' | 'text';
   size?: 'default' | 'small';
 }

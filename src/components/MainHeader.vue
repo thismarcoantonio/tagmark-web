@@ -12,7 +12,9 @@
       <main-button rounded variant="secondary" class="mr-3" :to="{ path: Routes.MyTags }">
         My tags
       </main-button>
-      <main-button rounded class="mr-6">New bookmark</main-button>
+      <main-button rounded class="mr-6" :to="{ path: Routes.SaveBookmark }">
+        New bookmark
+      </main-button>
       <div class="absolute top-2 right-4 md:static md:top-0 md:right-0">
         <user-avatar />
       </div>
