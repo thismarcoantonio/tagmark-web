@@ -14,7 +14,7 @@
           @click="handleClose"
         />
         <div
-          class="main-drawer__card absolute top-4 right-4 rounded-xl border border-b-2 border-neutral-200 bg-white p-6 shadow-md"
+          class="absolute h-full w-full bg-white p-6 shadow-md md:top-4 md:right-4 md:w-[30%] md:rounded-xl md:border md:border-b-2 md:border-neutral-200"
         >
           <div class="mb-8 flex justify-between">
             <h2 class="text-xl font-bold">{{ title }}</h2>
@@ -52,9 +52,3 @@ onMounted(() => {
   isMounted.value = true;
 });
 </script>
-
-<style scoped>
-.main-drawer__card {
-  width: 30%;
-}
-</style>

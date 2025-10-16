@@ -2,7 +2,7 @@
   <main-menu>
     <template #activator>
       <div
-        class="flex h-13 w-13 items-center justify-center rounded-full border border-b-4 border-gray-600 bg-blue-500 font-bold text-white decoration-0 hover:bg-blue-700"
+        class="flex h-10 w-10 items-center justify-center rounded-full border border-b-4 border-gray-600 bg-blue-500 text-sm font-bold text-white decoration-0 hover:bg-blue-700 md:h-13 md:w-13 md:text-base"
       >
         MA
       </div>
