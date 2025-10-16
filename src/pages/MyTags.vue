@@ -20,7 +20,7 @@
             rounded
             size="small"
             class="mr-1 flex-shrink-0 !border-b-1"
-            @click="handleCreateTag"
+            @click="createTag(search)"
           >
             Add tag
           </main-button>
@@ -40,7 +40,9 @@
           </div>
           <p class="text-gray-400">Used by {{ 100 }} bookmarks</p>
         </div>
-        <main-button variant="text" size="small" class="ml-auto">Delete</main-button>
+        <main-button variant="text" size="small" class="ml-auto" @click="deleteTag(tag.id)">
+          Delete
+        </main-button>
         <main-button variant="text" size="small">Edit</main-button>
       </li>
     </ul>
@@ -50,7 +52,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
 import { Routes } from '@/router';
-import { createTag, getTags } from '@/services/tags';
+import { createTag, deleteTag, getTags } from '@/services/tags';
 import type { Tag } from '@/declarations/Tag';
 import MainDrawer from '@/components/MainDrawer.vue';
 import TextField from '@/components/TextField.vue';
@@ -71,10 +73,6 @@ const canCreateNewTag = computed(
     search.value &&
     !tags.value.some((tag) => tag.name.toLocaleLowerCase() === search.value.toLocaleLowerCase()),
 );
-
-function handleCreateTag() {
-  createTag(search.value);
-}
 
 onMounted(async () => {
   tags.value = await getTags();

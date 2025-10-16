@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, getDocs, getFirestore, doc } from 'firebase/firestore';
 import { Collections } from '@/config/firebase';
 import { generateRandomTagColor } from '@/utils/tags';
 import type { Tag } from '@/declarations/Tag';
@@ -17,11 +17,21 @@ export async function getTags() {
 export async function createTag(name: Tag['name']) {
   const db = getFirestore();
   const tagsCollection = collection(db, Collections.TAGS);
-  const doc = await addDoc(tagsCollection, {
+  const document = await addDoc(tagsCollection, {
     name,
     createdAt: new Date(),
     updatedAt: new Date(),
     color: generateRandomTagColor(),
   });
-  return doc.toJSON();
+  return document.toJSON();
+}
+
+export async function deleteTag(id: Tag['id']) {
+  const db = getFirestore();
+  try {
+    await deleteDoc(doc(db, Collections.TAGS, id));
+    return true;
+  } catch {
+    return false;
+  }
 }
