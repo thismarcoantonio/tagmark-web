@@ -4,3 +4,35 @@ body {
   @apply bg-yellow-50 text-gray-600;
   font-family: 'Nunito', sans-serif;
 }
+
+.multiselect {
+  @apply relative w-full;
+}
+
+.multiselect__tags {
+  @apply flex min-h-[43px] w-full flex-wrap items-center rounded-xl border border-b-2 border-gray-300 p-2 focus-within:border-green-600;
+}
+
+.multiselect__tags-wrap {
+  @apply flex flex-wrap gap-2;
+}
+
+.multiselect__content {
+  @apply w-full;
+}
+
+.multiselect__content-wrapper {
+  @apply absolute mt-1 w-full overflow-auto rounded-xl border border-b-2 border-gray-300 bg-white shadow-sm;
+}
+
+.multiselect__option {
+  @apply flex cursor-pointer items-center px-4 py-2 hover:bg-gray-100;
+}
+
+.multiselect__option::after {
+  @apply hidden;
+}
+
+.multiselect__input {
+  @apply flex-1 px-2 outline-0;
+}
