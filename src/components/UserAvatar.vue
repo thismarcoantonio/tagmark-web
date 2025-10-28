@@ -26,14 +26,15 @@
 import { useRouter } from 'vue-router';
 import { SettingsIcon, LogOutIcon } from 'lucide-vue-next';
 import { Routes } from '@/router';
-import { authService } from '@/services/auth';
+import { useUserStore } from '@/stores/user';
 import MainMenu from '@/components/MainMenu.vue';
 import MainMenuItem from '@/components/MainMenuItem.vue';
 
 const $router = useRouter();
+const userStore = useUserStore();
 
 async function logout() {
-  await authService.logout();
+  await userStore.logout();
   $router.push({ name: Routes.Login });
 }
 </script>

@@ -11,21 +11,28 @@ import {
 
 async function checkUserAuth() {
   const auth = getAuth();
-  return new Promise<User | false>((resolve, reject) =>
-    onAuthStateChanged(auth, (user) => resolve(user ?? false), reject),
-  );
-}
-
-async function createUserAccount(email: string, password: string) {
-  const auth = getAuth();
-  const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
-  return userCredentials.user;
+  return new Promise<User | false>((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (user) => {
+        resolve(user ?? false);
+        unsubscribe();
+      },
+      reject,
+    );
+  });
 }
 
 async function createOrLoginWithGoogleAccount() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const userCredentials = await signInWithPopup(auth, provider);
+  return userCredentials.user;
+}
+
+async function createUserAccount(email: string, password: string) {
+  const auth = getAuth();
+  const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
   return userCredentials.user;
 }
 

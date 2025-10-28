@@ -1,14 +1,15 @@
-import { Routes } from '@/router';
-import { authService } from '@/services/auth';
 import type { NavigationGuardNext, RouteLocationNormalizedGeneric } from 'vue-router';
+import { Routes } from '@/router';
+import { useUserStore } from '@/stores/user';
 
 export async function privateRoute(
   to: RouteLocationNormalizedGeneric,
   from: RouteLocationNormalizedGeneric,
   next: NavigationGuardNext,
 ) {
-  const isUserAuthenticated = await authService.checkUserAuth();
-  if (isUserAuthenticated) return next();
+  const userStore = useUserStore();
+  await userStore.checkUserAuth();
+  if (userStore.isAuthenticated) return next();
   return next({ name: Routes.Login });
 }
 
@@ -17,7 +18,8 @@ export async function authRoutes(
   from: RouteLocationNormalizedGeneric,
   next: NavigationGuardNext,
 ) {
-  const isUserAuthenticated = await authService.checkUserAuth();
-  if (isUserAuthenticated) return next({ name: Routes.Homepage });
+  const userStore = useUserStore();
+  await userStore.checkUserAuth();
+  if (userStore.isAuthenticated) return next({ name: Routes.Homepage });
   return next();
 }

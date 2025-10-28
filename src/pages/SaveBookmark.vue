@@ -23,7 +23,7 @@
         <v-error-message name="links" class="text-sm text-red-500" />
         <main-button
           v-if="fields.length < 5"
-          class="flex items-center gap-1"
+          class="mb-4 flex items-center gap-1"
           variant="text"
           size="small"
           @click="push('')"
@@ -32,12 +32,23 @@
           Add new link
         </main-button>
       </v-field-array>
+      <combobox-field
+        v-model:custom-options="customTags"
+        name="tags"
+        label="Tags"
+        :options="[
+          { label: 'spirituality', value: 'spirituality' },
+          { label: 'gaming', value: 'gaming' },
+        ]"
+        required
+      />
       <main-button type="submit">Create</main-button>
     </v-form>
   </main-drawer>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import {
   Form as VForm,
   FieldArray as VFieldArray,
@@ -50,11 +61,14 @@ import { Routes } from '@/router';
 import MainButton from '@/components/MainButton.vue';
 import MainDrawer from '@/components/MainDrawer.vue';
 import TextField from '@/components/TextField.vue';
+import ComboboxField from '@/components/ComboboxField.vue';
 
 const initialValues = {
   links: [''],
-  tags: ['1'],
+  tags: [],
 };
+
+const customTags = ref<string[]>();
 
 const validationSchema = yup.object({
   title: yup
@@ -70,7 +84,11 @@ const validationSchema = yup.object({
     .optional()
     .max(5, 'You can include up to 5 links')
     .strict(),
-  tags: yup.array().of(yup.string()).required('At least one tag is required'),
+  tags: yup
+    .array()
+    .of(yup.string())
+    .min(1, 'At least one tag is required')
+    .required('At least one tag is required'),
 });
 
 function onSubmit(values: GenericObject) {

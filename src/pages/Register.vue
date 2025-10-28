@@ -17,17 +17,16 @@
         <main-button class="w-full" type="submit">Create now</main-button>
       </v-form>
       <main-divider class="my-6">or</main-divider>
-      <google-button @click="registerWithGoogle" />
+      <google-button @click="userStore.createOrLoginWithGoogleAccount" />
     </main-card>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
 import { Form as VForm, type GenericObject } from 'vee-validate';
 import * as yup from 'yup';
 import { Routes } from '@/router';
-import { authService } from '@/services/auth';
+import { useUserStore } from '@/stores/user';
 import MainTitle from '@/components/MainTitle.vue';
 import MainCard from '@/components/MainCard.vue';
 import MainButton from '@/components/MainButton.vue';
@@ -35,7 +34,7 @@ import TextField from '@/components/TextField.vue';
 import MainDivider from '@/components/MainDivider.vue';
 import GoogleButton from '@/components/GoogleButton.vue';
 
-const $router = useRouter();
+const userStore = useUserStore();
 
 const validationSchema = yup.object({
   email: yup.string().trim().email('Invalid email address').required('Email is required'),
@@ -49,13 +48,7 @@ const validationSchema = yup.object({
     .required('Password confirmation is required'),
 });
 
-function onSubmit(values: GenericObject) {
-  authService.createUserAccount(values.email, values.password);
-  $router.push({ name: Routes.Homepage });
-}
-
-async function registerWithGoogle() {
-  await authService.createOrLoginWithGoogleAccount();
-  $router.push({ name: Routes.Homepage });
+async function onSubmit(values: GenericObject) {
+  await userStore.createUserAccount(values.email, values.password);
 }
 </script>

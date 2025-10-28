@@ -19,17 +19,16 @@
         <main-button class="w-full" type="submit">Sign in</main-button>
       </v-form>
       <main-divider class="my-6">or</main-divider>
-      <google-button @click="loginWithGoogle" />
+      <google-button @click="userStore.createOrLoginWithGoogleAccount" />
     </main-card>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
 import { Form as VForm, type GenericObject } from 'vee-validate';
 import * as yup from 'yup';
 import { Routes } from '@/router';
-import { authService } from '@/services/auth';
+import { useUserStore } from '@/stores/user';
 import MainTitle from '@/components/MainTitle.vue';
 import MainCard from '@/components/MainCard.vue';
 import MainButton from '@/components/MainButton.vue';
@@ -37,7 +36,7 @@ import TextField from '@/components/TextField.vue';
 import MainDivider from '@/components/MainDivider.vue';
 import GoogleButton from '@/components/GoogleButton.vue';
 
-const $router = useRouter();
+const userStore = useUserStore();
 
 const validationSchema = yup.object({
   email: yup.string().trim().email('Invalid email address').required('Email is required'),
@@ -48,12 +47,6 @@ const validationSchema = yup.object({
 });
 
 async function onSubmit(values: GenericObject) {
-  await authService.loginUserAccount(values.email, values.password);
-  $router.push({ name: Routes.Homepage });
-}
-
-async function loginWithGoogle() {
-  await authService.createOrLoginWithGoogleAccount();
-  $router.push({ name: Routes.Homepage });
+  await userStore.loginUserAccount(values.email, values.password);
 }
 </script>
