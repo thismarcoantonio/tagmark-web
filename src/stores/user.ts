@@ -5,6 +5,7 @@ import { Routes } from '@/router';
 import { authService } from '@/services/auth';
 import { useStorage } from '@/utils/storage';
 import type { User } from '@/declarations/User';
+import { resetStores } from '@/stores';
 
 export const useUserStore = defineStore('user', () => {
   const $router = useRouter();
@@ -60,8 +61,7 @@ export const useUserStore = defineStore('user', () => {
 
   async function logout() {
     await authService.logout();
-    user.value = null;
-    isAuthenticated.value = false;
+    resetStores();
     $router.push({ name: Routes.Login });
   }
 
@@ -73,5 +73,9 @@ export const useUserStore = defineStore('user', () => {
     createUserAccount,
     loginUserAccount,
     logout,
+    $reset() {
+      user.value = null;
+      isAuthenticated.value = false;
+    },
   };
 });
