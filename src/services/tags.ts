@@ -17,13 +17,16 @@ export async function getTags() {
 export async function createTag(name: Tag['name']) {
   const db = getFirestore();
   const tagsCollection = collection(db, Collections.TAGS);
-  const document = await addDoc(tagsCollection, {
+  const now = new Date().getTime();
+  const newTag = {
     name,
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: now,
+    updatedAt: now,
     color: generateRandomTagColor(),
-  });
-  return document.toJSON();
+  };
+  const { id } = await addDoc(tagsCollection, newTag);
+
+  return { ...newTag, id };
 }
 
 export async function deleteTag(id: Tag['id']) {
