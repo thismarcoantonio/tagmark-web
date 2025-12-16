@@ -53,7 +53,7 @@
         <main-button variant="text" size="small">Edit</main-button>
       </li>
     </ul>
-    <div v-else>No tags found. Create one by typing a name above.</div>
+    <div v-else>No tags found.</div>
   </main-drawer>
 </template>
 
