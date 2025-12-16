@@ -4,7 +4,7 @@
       <div
         class="flex h-10 w-10 items-center justify-center rounded-full border border-b-4 border-gray-600 bg-blue-500 text-sm font-bold text-white decoration-0 hover:bg-blue-700 md:h-13 md:w-13 md:text-base"
       >
-        MA
+        {{ initials }}
       </div>
     </template>
     <main-menu-item>
@@ -29,9 +29,16 @@ import { Routes } from '@/router';
 import { useUserStore } from '@/stores/user';
 import MainMenu from '@/components/MainMenu.vue';
 import MainMenuItem from '@/components/MainMenuItem.vue';
+import { computed } from 'vue';
 
 const $router = useRouter();
 const userStore = useUserStore();
+
+const initials = computed(() => {
+  const user = userStore.user;
+  const [firstName = '', lastName = ''] = user?.displayName?.split(' ') || [];
+  return `${firstName.charAt(0)}${lastName?.charAt(0)}`.toUpperCase();
+});
 
 async function logout() {
   await userStore.logout();
