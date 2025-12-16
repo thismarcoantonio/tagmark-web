@@ -70,7 +70,7 @@ const tagsStore = useTagsStore();
 const search = ref('');
 
 const filteredTags = computed(() =>
-  tagsStore.tags.filter((tag) =>
+  tagsStore.tagsList.filter((tag) =>
     tag.name.toLocaleLowerCase().includes(search.value.toLocaleLowerCase()),
   ),
 );
@@ -78,7 +78,7 @@ const filteredTags = computed(() =>
 const canCreateNewTag = computed(
   () =>
     search.value &&
-    !tagsStore.tags.some(
+    !tagsStore.tagsList.some(
       (tag) => tag.name.toLocaleLowerCase() === search.value.toLocaleLowerCase(),
     ),
 );
