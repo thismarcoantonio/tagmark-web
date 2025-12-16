@@ -1,6 +1,6 @@
 <template>
   <main-header />
-  <div class="mb-6 flex gap-2 overflow-x-auto px-4 font-semibold">
+  <div class="relative mb-6 flex gap-2 overflow-x-auto px-4 font-semibold">
     <main-tag
       :active="!activeTag"
       bg-color="bg-green-600"
@@ -29,16 +29,14 @@
       is="article"
     >
       <div class="mb-3 flex gap-x-2">
-        <main-tag size="small" bg-color="bg-yellow-300" class="text-gray-800">
-          {{ bookmark.tags.length }} tags
-        </main-tag>
         <main-tag
-          v-if="bookmark.links.length"
+          v-for="tag in bookmark.tags.slice(0, 2)"
+          :key="tag"
           size="small"
-          bg-color="bg-red-300"
+          :bg-color="tagsStore.getTagById(tag)?.color"
           class="text-gray-800"
         >
-          {{ bookmark.links.length }} links
+          {{ tagsStore.getTagById(tag)?.name }}
         </main-tag>
       </div>
       <h1 class="mb-3 text-xl font-bold text-gray-800">{{ bookmark.title }}</h1>

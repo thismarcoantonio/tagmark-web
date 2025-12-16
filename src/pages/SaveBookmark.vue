@@ -34,13 +34,10 @@
       </v-field-array>
       <combobox-field
         v-model:custom-options="customTags"
+        required
         name="tags"
         label="Tags"
-        :options="[
-          { label: 'spirituality', value: 'spirituality' },
-          { label: 'gaming', value: 'gaming' },
-        ]"
-        required
+        :options="tagsStore.tagsList.map((tag) => ({ label: tag.name, value: tag.id }))"
       />
       <main-button type="submit">Create</main-button>
     </v-form>
@@ -59,12 +56,13 @@ import { useRouter } from 'vue-router';
 import { PlusIcon, XIcon } from 'lucide-vue-next';
 import * as yup from 'yup';
 import { Routes } from '@/router';
+import { useTagsStore } from '@/stores/tags';
+import { useBookmarksStore } from '@/stores/bookmarks';
+import type { Bookmark } from '@/declarations/Bookmark';
 import MainButton from '@/components/MainButton.vue';
 import MainDrawer from '@/components/MainDrawer.vue';
 import TextField from '@/components/TextField.vue';
 import ComboboxField from '@/components/ComboboxField.vue';
-import { useBookmarksStore } from '@/stores/bookmarks';
-import type { Bookmark } from '@/declarations/Bookmark';
 
 const initialValues = {
   links: [''],
@@ -72,6 +70,7 @@ const initialValues = {
 };
 
 const $router = useRouter();
+const tagsStore = useTagsStore();
 const bookmarksStore = useBookmarksStore();
 
 const customTags = ref<string[]>();

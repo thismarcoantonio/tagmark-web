@@ -5,7 +5,7 @@
     class="relative rounded-full bg-white select-none"
   >
     <div
-      class="relative z-20 flex items-center gap-2"
+      class="relative z-[1] flex items-center gap-2"
       :class="[active ? 'text-white' : 'text-gray-600']"
     >
       <div
@@ -16,7 +16,7 @@
       <slot />
     </div>
     <div
-      class="absolute top-0 left-0 z-10 h-full w-full rounded-full"
+      class="absolute top-0 left-0 z-[0] h-full w-full rounded-full"
       :class="[bgColor, active ? 'opacity-100' : 'opacity-20']"
     />
   </component>

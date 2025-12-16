@@ -4,11 +4,16 @@ import * as bookmarksService from '@/services/bookmarks';
 import type { Bookmark } from '@/declarations/Bookmark';
 
 export const useBookmarksStore = defineStore('bookmarks', () => {
-  const bookmarks = useStorage<Bookmark[]>('bookmarks', []);
+  const bookmarks = useStorage<{ [key: Bookmark['id']]: Bookmark }>('bookmarks', {});
 
   async function getBookmarks() {
-    if (bookmarks.value.length) return bookmarks.value;
-    bookmarks.value = await bookmarksService.getBookmarks();
+    if (Object.keys(bookmarks.value).length) return bookmarks.value;
+    const data = await bookmarksService.getBookmarks();
+    const bookmarksObject = data.reduce(
+      (result, bookmark) => ({ ...result, [bookmark.id]: bookmark }),
+      {},
+    );
+    bookmarks.value = bookmarksObject;
     return bookmarks.value;
   }
 
@@ -16,14 +21,14 @@ export const useBookmarksStore = defineStore('bookmarks', () => {
     bookmark: Pick<Bookmark, 'title' | 'description' | 'links' | 'tags'>,
   ) {
     const newBookmark = await bookmarksService.createBookmark(bookmark);
-    bookmarks.value.push(newBookmark);
+    bookmarks.value[newBookmark.id] = newBookmark;
     return newBookmark;
   }
 
   async function deleteBookmark(id: Bookmark['id']) {
     const success = await bookmarksService.deleteBookmark(id);
     if (success) {
-      bookmarks.value = bookmarks.value.filter((bookmark) => bookmark.id !== id);
+      delete bookmarks.value[id];
     }
   }
 
