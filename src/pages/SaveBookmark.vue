@@ -55,6 +55,7 @@ import {
   ErrorMessage as VErrorMessage,
   type GenericObject,
 } from 'vee-validate';
+import { useRouter } from 'vue-router';
 import { PlusIcon, XIcon } from 'lucide-vue-next';
 import * as yup from 'yup';
 import { Routes } from '@/router';
@@ -62,11 +63,16 @@ import MainButton from '@/components/MainButton.vue';
 import MainDrawer from '@/components/MainDrawer.vue';
 import TextField from '@/components/TextField.vue';
 import ComboboxField from '@/components/ComboboxField.vue';
+import { useBookmarksStore } from '@/stores/bookmarks';
+import type { Bookmark } from '@/declarations/Bookmark';
 
 const initialValues = {
   links: [''],
   tags: [],
 };
+
+const $router = useRouter();
+const bookmarksStore = useBookmarksStore();
 
 const customTags = ref<string[]>();
 
@@ -91,7 +97,8 @@ const validationSchema = yup.object({
     .required('At least one tag is required'),
 });
 
-function onSubmit(values: GenericObject) {
-  console.log(values);
+async function onSubmit(values: GenericObject) {
+  await bookmarksStore.createBookmark(values as Bookmark);
+  $router.push({ name: Routes.Homepage });
 }
 </script>

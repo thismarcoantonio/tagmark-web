@@ -65,9 +65,9 @@ import MainDrawer from '@/components/MainDrawer.vue';
 import TextField from '@/components/TextField.vue';
 import MainButton from '@/components/MainButton.vue';
 
-const search = ref('');
-
 const tagsStore = useTagsStore();
+
+const search = ref('');
 
 const filteredTags = computed(() =>
   tagsStore.tags.filter((tag) =>

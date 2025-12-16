@@ -14,4 +14,5 @@ export const emulatorConfig = {
 
 export enum Collections {
   TAGS = 'tags',
+  BOOKMARKS = 'bookmarks',
 }
